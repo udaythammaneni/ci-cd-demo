@@ -8,6 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      APP_ENV: ${{ secrets.APP_ENV }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
