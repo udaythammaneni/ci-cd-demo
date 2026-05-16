@@ -28,3 +28,6 @@ jobs:
 
       - name: Run app
         run: npm start
+
+      - name: List files
+        run: ls -la
