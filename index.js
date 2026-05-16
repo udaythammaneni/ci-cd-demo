@@ -1,1 +1,1 @@
-console.log("CI/CD Day 1");
+console.log("App running inside CI");
