@@ -45,3 +45,6 @@ jobs:
 
       # - name: List files
       # run: ls -la
+
+      - name: Build Docker image
+        run: docker build -t ci-cd-demo .
