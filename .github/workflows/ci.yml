@@ -12,11 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print message
-        run: echo "CI is working!"
+      # - name: Print message
+      # run: echo "CI is working!"
 
-      - name: Show Node version
-        run: node -v
+      # - name: Show Node version
+      # run: node -v
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -39,5 +39,5 @@ jobs:
       - name: Run app
         run: npm start
 
-      - name: List files
-        run: ls -la
+      # - name: List files
+      # run: ls -la
