@@ -12,7 +12,7 @@ app.use(express.json());
 // Health Check
 app.get('/', (req, res) => {
   res.json({
-    message: 'Node.js server is running 🚀',
+    message: 'Node.js server version 2 is running successfully!',
     environment: process.env.APP_ENV || 'development',
     timestamp: new Date().toISOString(),
   });
