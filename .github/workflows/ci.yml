@@ -41,7 +41,7 @@ jobs:
         run: npm test
 
       # - name: Run app
-        # run: npm start
+      # run: npm start
 
       # - name: List files
       # run: ls -la
