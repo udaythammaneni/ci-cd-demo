@@ -46,14 +46,30 @@ jobs:
       # - name: List files
       # run: ls -la
 
-      - name: Build Docker image
-        run: docker build -t ci-cd-demo .
+      # - name: Build Docker image
+      # run: docker build -t ci-cd-demo .
 
       - name: Login to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Image
-        run: docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
+        run: docker build -t ghcr.io/${{ github.repository }}:${{ github.sha }} -t ghcr.io/${{ github.repository }}:latest .
 
       - name: Push Image
-        run: docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
+        run: docker push ghcr.io/${{ github.repository }}:${{ github.sha }} docker push ghcr.io/${{ github.repository }}:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            docker pull ghcr.io/${{ github.repository }}:latest
+
+            docker stop ci-cd-demo || true
+            docker rm ci-cd-demo || true
+
+            docker run -d --name ci-cd-demo --restart unless-stopped -p 3000:3000 ghcr.io/${{ github.repository }}:latest
