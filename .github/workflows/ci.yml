@@ -59,7 +59,9 @@ jobs:
             -t ghcr.io/${{ github.repository }}:latest .
 
       - name: Push Image
-        run: docker push ghcr.io/${{ github.repository }}:${{ github.sha }} docker push ghcr.io/${{ github.repository }}:latest
+        run: |
+          docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
+          docker push ghcr.io/${{ github.repository }}:latest
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.0
