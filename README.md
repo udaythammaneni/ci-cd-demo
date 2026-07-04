@@ -1,3 +1,3 @@
 # ci-cd-demo
 
-CI CD
+CI CD Flow
