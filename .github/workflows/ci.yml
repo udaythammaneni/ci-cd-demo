@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - develop
-      - staging
+      - multistage
       - main
 
 jobs:
@@ -60,10 +60,10 @@ jobs:
             echo "CONTAINER_NAME=ci-cd-demo-dev" >> $GITHUB_ENV
             echo "IMAGE_TAG=dev" >> $GITHUB_ENV
 
-          elif [ "${GITHUB_REF_NAME}" = "staging" ]; then
+          elif [ "${GITHUB_REF_NAME}" = "multistage" ]; then
             echo "PORT=3002" >> $GITHUB_ENV
-            echo "CONTAINER_NAME=ci-cd-demo-staging" >> $GITHUB_ENV
-            echo "IMAGE_TAG=staging" >> $GITHUB_ENV
+            echo "CONTAINER_NAME=ci-cd-demo-multistage" >> $GITHUB_ENV
+            echo "IMAGE_TAG=multistage" >> $GITHUB_ENV
 
           else
             echo "PORT=3000" >> $GITHUB_ENV
